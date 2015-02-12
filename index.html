@@ -1,0 +1,74 @@
+<html><head>
+<style type="text/css">
+p {
+	width:70%;
+	margin-left: .4em;
+}
+li {
+	width:80%;
+}
+img {
+	padding: .2em;
+}
+</style>
+<body>
+<div style="background-color:white; float:right; position:fixed; top:0em; right:.5em;">
+<ul>
+<li><a href="#p1">PROTOTYPE 1</a></li>
+<ul><li><a href="#p1fab">FABRICATION</a></li>
+<li><a href="#p1hookup">HOOKUP</a></li>
+</ul>
+<li><a href="#cards">MAKING THE CARDS</a></li>
+<li><a href="#applications">APPLICATIONS</a></li>
+</ul>
+</div>
+<h1>punchbug</h1>
+<p>make a raspberry pi controlled punchcard reader!</p>
+<h2>PROTOTYPE 1<a name="p1"></h2>
+<p>current functional version, mounted through wood with a bunch of masking tape and really ugly breadboarding attached to a <a href="https://www.sparkfun.com/products/12652">sparkfun pi wedge</a>.</p>
+<ul>
+<li><a href="https://github.com/modgethanc/punchbug">git repo</a> for my code</li>
+<li><a href="http://www.utf8-chartable.de/unicode-utf8-table.pl?number=128&names=-&utf8=bin">unicode chart</a> for making your own cards</li>
+</ul>
+<h3>FABRICATION<a name="p1fab"></h3>
+<p>drill eight holes through a block of wood. sand off splinters. take 8 photoresistors (i used: <a href="https://www.sparkfun.com/products/9088">sparkfun mini photocell</a> at $1.50 a pop). gently bend the legs so they sit nicely inside the holes. use a string of female headers to set the spacing and bend of the legs once they're secured. check alignment on a breadboard.</p>
+<p>
+<img src="http://theta.cfa.cmu.edu/hvincent/punchbug/pics/IMG_20150206_124210.jpg">
+<img src="http://theta.cfa.cmu.edu/hvincent/punchbug/pics/IMG_20150206_123644.jpg"> 
+<img src="http://theta.cfa.cmu.edu/hvincent/punchbug/pics/IMG_20150206_123651.jpg">
+<img src="http://theta.cfa.cmu.edu/hvincent/punchbug/pics/IMG_20150206_123718.jpg">
+<img src="http://theta.cfa.cmu.edu/hvincent/punchbug/pics/IMG_20150206_124412.jpg">
+<img src="http://theta.cfa.cmu.edu/hvincent/punchbug/pics/IMG_20150206_124833.jpg">
+<img src="http://theta.cfa.cmu.edu/hvincent/punchbug/pics/IMG_20150206_124911.jpg">
+<img src="http://theta.cfa.cmu.edu/hvincent/punchbug/pics/IMG_20150206_130037.jpg">
+<img src="http://theta.cfa.cmu.edu/hvincent/punchbug/pics/IMG_20150206_130211.jpg">
+<img src="http://theta.cfa.cmu.edu/hvincent/punchbug/pics/IMG_20150206_130353.jpg">
+<img src="http://theta.cfa.cmu.edu/hvincent/punchbug/pics/IMG_20150206_130505.jpg">
+<img src="http://theta.cfa.cmu.edu/hvincent/punchbug/pics/IMG_20150206_130510.jpg">
+<img src="http://theta.cfa.cmu.edu/hvincent/punchbug/pics/IMG_20150206_131047.jpg">
+</p>
+<h3>HOOKUP<a name="p1hookup"></h3>
+<p>it's really hard for the rpi to just measure resistance. the rpi also does not have analog input. so, all of the photocells have to be hooked up as digital input (meaning either on or off), and also needs a <a href="http://en.wikipedia.org/wiki/Voltage_divider">voltage divider</a>. i don't really know what most of this means because i don't know much about electrons.</p>
+<p>basically, the way these are hooked up is that each pin is hooked up to a photocell and a 10k resistor that are in series with each other; the resistor goes to ground, and the photocell goes to 3.3v. this means that through the power of some magic i learned in high school physics and have since forgotten about, the rpi can read each pin.</p>
+<p>
+<img src="http://theta.cfa.cmu.edu/hvincent/punchbug/pics/IMG_20150209_100812.jpg">
+<img src="http://theta.cfa.cmu.edu/hvincent/punchbug/pics/IMG_20150212_140347.jpg">
+</p>
+<h2>MAKING THE CARDS<a name="cards"></h2>
+<p>black cardstock works pretty well. measure out a grid for yourself.</p>
+<p>i used <a href="http://www.utf8-chartable.de/unicode-utf8-table.pl?number=128&names=-&utf8=bin">this unicode chart</a> as a guide, marking them out first with a pencil and then cutting. it's tedious, i know. i'm so glad we invented keyboards.</p>
+<p>pictured here: 1/2" columns, with rows aligned to the center of each resistor from PROTOTYPE 1. the circular holes were done with a handheld hole puncher, which did not have enough reach for any mark not along the edge; the square ones were cut by hand with an exacto knife. for bits that are adjacent, it's quicker to cut out that whole section of the column. the pieces of tape are there to correct 'typos'.</p>
+<p>
+<img src="http://theta.cfa.cmu.edu/hvincent/punchbug/pics/IMG_20150212_135425.jpg">
+<img src="http://theta.cfa.cmu.edu/hvincent/punchbug/pics/IMG_20150212_140240.jpg">
+</p>
+<h2>APPLICATIONS<a name="applications"></h2>
+<p>currently, i'm taking readings from this and running them to my <a href="http://twitter.com/kvincenttt">twitterbot</a>. see <i>punchtwit.py</i> in my github repo for specifics.</p>
+<p>future ideas:
+<ul>
+<li>fabricate reading adapters for original <a href="http://en.wikipedia.org/wiki/Punched_card#Card_formats">punchcard formats</a>. i already have a couple of files for 3d printing, but i don't want to make anything specific until i have some actual artifacts to use (ps: if you have old punchcards, please consider offloading them on me. you will probably never get them back).</li>
+<li>write some more code to do different things with the input. current ideas include: music/audio output generated from original punchcards, color/light control, etc.</li>
+</ul></p>
+<p><i>with love, hvincent</i></p>
+</body>
+</html>

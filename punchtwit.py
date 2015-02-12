@@ -74,16 +74,15 @@ try:
     while 1:
 	if read() == 0:	
 		readnext = 1
-	if readnext:
-		if read() != 0:
+	if readnext and read() !=0:
+		render()
+		readnext = 0
+		if read() > 31 and read() < 127:
 			msg += chr(read())
-			render()
-			readnext = 0
-	if read() == 255:
-		if msg:
-			twit.PostUpdate(msg)
-			print "tweeting: " + msg
-			msg = ''
+	if read() == 255 and msg:
+		twit.PostUpdate(msg)
+		print "tweeting: " + msg
+		msg = ''
 
 	time.sleep(.5)
 except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:

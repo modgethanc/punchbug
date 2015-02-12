@@ -5,6 +5,6 @@ an rpi-powered punchcard reader
 * 8 10k resistors
 * super messy breadboarding
 
-better prototypes and writeup later
+for full docs, see <a href="http://skid.no-leverage.com/punchbug/">here</a>
 
-currently tweeting punchcard results to http://twitter.com/kvincenttt
+currently tweeting punchcard results to <a href="http://twitter.com/kvincenttt">@kvincenttt</a>
