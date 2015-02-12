@@ -1,5 +1,20 @@
+#!/usr/bin/python
+import twitter
 import RPi.GPIO as GPIO
 import time
+
+# twitter setup
+configfile = open("twitconfig.txt", "r")
+
+ck = configfile.readline().rstrip('\r\n')
+cs = configfile.readline().rstrip('\r\n')
+atk = configfile.readline().rstrip('\r\n')
+ats = configfile.readline().rstrip('\r\n')
+
+twit = twitter.Api(consumer_key=ck,
+                      consumer_secret=cs,
+                      access_token_key=atk,
+                      access_token_secret=ats)
 
 # Pin Definitons:
 pin0 = 4
@@ -44,18 +59,21 @@ def read():
 	return val
 
 def render():
-	print("reading: %s%s%s%s%s%s%s%s (%s) " + chr(read())) % (GPIO.input(pin0), GPIO.input(pin1), GPIO.input(pin2), GPIO.input(pin3), GPIO.input(pin4), GPIO.input(pin5), GPIO.input(pin6),GPIO.input(pin7), read())
+	print("%s%s%s%s%s%s%s%s (%s) " + chr(read())) % (GPIO.input(pin0), GPIO.input(pin1), GPIO.input(pin2), GPIO.input(pin3), GPIO.input(pin4), GPIO.input(pin5), GPIO.input(pin6),GPIO.input(pin7), read())
 
-print("starting!\n")
-#last = 255
+
+#===== MAIN 
+
+if twit.VerifyCredentials():
+	print "twitter login successful!"
+
+print("reading!\n")
 readnext = 0
 msg = ''
 try:
     while 1:
-	#curr = read()
 	if read() == 0:	
 		readnext = 1
-		#last = curr
 	if readnext:
 		if read() != 0:
 			msg += chr(read())
@@ -63,9 +81,10 @@ try:
 			readnext = 0
 	if read() == 255:
 		if msg:
-			print msg
+			twit.PostUpdate(msg)
+			print "tweeting: " + msg
 			msg = ''
 
-	time.sleep(.1)
+	time.sleep(.5)
 except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
     GPIO.cleanup() # cleanup all GPIO
